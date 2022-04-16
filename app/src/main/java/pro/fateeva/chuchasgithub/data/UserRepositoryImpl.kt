@@ -12,7 +12,7 @@ class UserRepositoryImpl : UserRepository {
         User(4, "Perfect_sun", "", listOf("Sunshine", "Reggy", "Happy") )
     )
 
-    override fun getUsersList(): List<User> {
+    override fun getUserList(): List<User> {
         Thread.sleep(3000)
         return usersList.toList()
     }

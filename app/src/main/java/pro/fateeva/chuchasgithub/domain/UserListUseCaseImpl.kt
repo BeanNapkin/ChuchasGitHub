@@ -10,6 +10,6 @@ class UserListUseCaseImpl(private val repository: UserRepository) : UserListUseC
     }
 
     override fun getUserList(): List<User> {
-        return repository.getUsersList().toList()
+        return repository.getUserList().toList()
     }
 }
