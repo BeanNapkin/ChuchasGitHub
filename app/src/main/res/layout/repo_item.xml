@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/userCardView"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    app:cardBackgroundColor="#F4F4F4"
+    android:layout_height="30dp"
+    app:cardBackgroundColor="#FFF7F7"
     android:layout_margin="5dp">
 
     <TextView
@@ -13,7 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Иван Иванов"
-        android:textSize="20sp" />
+        android:text="MVVMApp"
+        android:textStyle="bold"
+        android:textSize="14sp" />
 
 </com.google.android.material.card.MaterialCardView>
