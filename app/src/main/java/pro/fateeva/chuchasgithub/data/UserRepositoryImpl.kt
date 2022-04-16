@@ -12,6 +12,11 @@ class UserRepositoryImpl : UserRepository {
         User(4, "Perfect_sun", "", listOf("Sunshine", "Reggy", "Happy") )
     )
 
+    override fun getUsersList(): List<User> {
+        Thread.sleep(3000)
+        return usersList.toList()
+    }
+
     override fun addUser(user: User) {
         usersList.add(user)
     }

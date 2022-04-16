@@ -3,6 +3,7 @@ package pro.fateeva.chuchasgithub
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import pro.fateeva.chuchasgithub.databinding.UserItemBinding
 import pro.fateeva.chuchasgithub.domain.entities.User
@@ -39,5 +40,23 @@ class UsersRecyclerAdapter(
                 }
             }
         }
+    }
+}
+
+class DiffUtilCallback(val oldList: List<User>, val newList: List<User>) : DiffUtil.Callback() {
+
+    override fun getOldListSize(): Int = oldList.size
+    override fun getNewListSize(): Int = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldUser: User = oldList[oldItemPosition]
+        val newUser: User = newList[newItemPosition]
+        return oldUser.id == newUser.id
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldUser: User = oldList[oldItemPosition]
+        val newUser: User = newList[newItemPosition]
+        return oldUser == newUser
     }
 }

@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import pro.fateeva.chuchasgithub.DiffUtilCallback
+import pro.fateeva.chuchasgithub.MyCallback
+import pro.fateeva.chuchasgithub.UsersRecyclerAdapter
 import pro.fateeva.chuchasgithub.app
 import pro.fateeva.chuchasgithub.databinding.UserListFragmentBinding
 
@@ -40,9 +43,25 @@ class UserListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getUserListLiveData().observe(viewLifecycleOwner) {
+        val adapter = UsersRecyclerAdapter(
+            emptyList(),
+            userCardClickListener = object : MyCallback {
+                override fun onClick(position: Int) {
+                    //Todo откытие другого фрагмента с инфой про юзера через вьюмодел
+                }
+            })
 
+        binding.recyclerView.adapter = adapter
+
+        viewModel.getUserListLiveData().observe(viewLifecycleOwner) {
+            val diffUtilCallback = DiffUtilCallback(adapter.userList, it)
+            val noteDiffResult = DiffUtil.calculateDiff(diffUtilCallback)
+
+            adapter.userList = it
+            noteDiffResult.dispatchUpdatesTo(adapter)
         }
+
+        viewModel.getUserList()
     }
 
     companion object {

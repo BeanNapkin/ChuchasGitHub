@@ -8,4 +8,8 @@ class UserListUseCaseImpl(private val repository: UserRepository) : UserListUseC
     override fun chooseUser(user: User) {
         TODO("Not yet implemented")
     }
+
+    override fun getUserList(): List<User> {
+        return repository.getUsersList().toList()
+    }
 }

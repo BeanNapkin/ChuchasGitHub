@@ -11,6 +11,11 @@ class UserListViewModel() : ViewModel() {
     private val mutableLiveData: MutableLiveData<List<User>> = MutableLiveData()
     val liveData: LiveData<List<User>> = mutableLiveData
 
-
     fun getUserListLiveData() = liveData
+
+    fun getUserList() {
+        Thread {
+            mutableLiveData.postValue(userListUseCase.getUserList())
+        }.start()
+    }
 }
