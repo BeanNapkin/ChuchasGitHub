@@ -11,6 +11,7 @@ import pro.fateeva.chuchasgithub.DiffUtilCallback
 import pro.fateeva.chuchasgithub.UsersRecyclerAdapter
 import pro.fateeva.chuchasgithub.app
 import pro.fateeva.chuchasgithub.databinding.UserListFragmentBinding
+import pro.fateeva.chuchasgithub.ui.userProfile.UserProfileFragment
 
 class UserListFragment : Fragment() {
 
@@ -45,7 +46,7 @@ class UserListFragment : Fragment() {
         val adapter = UsersRecyclerAdapter(
             emptyList(),
             userCardClickListener = { position ->
-                //Todo откытие другого фрагмента с инфой про юзера через вьюмодел
+                UserProfileFragment.newInstance(position).show(requireActivity().supportFragmentManager, UserProfileFragment.TAG)
             }
         )
 

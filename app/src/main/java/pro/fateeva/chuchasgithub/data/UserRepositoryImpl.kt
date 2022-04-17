@@ -21,7 +21,8 @@ class UserRepositoryImpl : UserRepository {
         usersList.add(user)
     }
 
-    override fun getUser(id: Int) : User? {
+    override fun getUser(id: Int) : User {
+        Thread.sleep(3000)
         return usersList[id]
     }
 

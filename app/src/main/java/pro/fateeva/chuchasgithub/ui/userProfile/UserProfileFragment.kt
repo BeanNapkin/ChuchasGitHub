@@ -1,16 +1,20 @@
 package pro.fateeva.chuchasgithub.ui.userProfile
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import pro.fateeva.chuchasgithub.R
 import pro.fateeva.chuchasgithub.app
+import pro.fateeva.chuchasgithub.databinding.UserListFragmentBinding
 import pro.fateeva.chuchasgithub.databinding.UserProfileFragmentBinding
 
-class UserProfileFragment : Fragment() {
+
+class UserProfileFragment(position: Int) : DialogFragment() {
+
+    private var position = position
 
     private var _binding: UserProfileFragmentBinding? = null
     val binding: UserProfileFragmentBinding
@@ -25,18 +29,35 @@ class UserProfileFragment : Fragment() {
 
     private val viewModel: UserProfileViewModel by lazy {
         ViewModelProvider(this).get(UserProfileViewModel::class.java).apply {
-            userProfileUseCase = requireContext().app.userProfileUseCase
+            useCase = requireContext().app.userListUseCase
         }
+    }
+
+    override fun getTheme(): Int {
+        return R.style.FullScreenDialog;
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.user_profile_fragment, container, false)
+        _binding = UserProfileFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getUserLiveData().observe(viewLifecycleOwner)
+        {
+            binding.nameTextView.text = it.name
+        }
+
+        viewModel.getUser(position)
     }
 
     companion object {
-        fun newInstance() = UserProfileFragment()
+        const val TAG = "UserProfileFragment"
+        fun newInstance(position: Int) = UserProfileFragment(position)
     }
 }

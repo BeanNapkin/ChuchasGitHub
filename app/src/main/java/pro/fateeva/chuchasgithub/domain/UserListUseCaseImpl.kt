@@ -5,8 +5,8 @@ import pro.fateeva.chuchasgithub.domain.entities.User
 
 class UserListUseCaseImpl(private val repository: UserRepository) : UserListUseCase {
 
-    override fun chooseUser(user: User) {
-        TODO("Not yet implemented")
+    override fun getUser(position: Int) : User {
+        return repository.getUser(position)
     }
 
     override fun getUserList(): List<User> {

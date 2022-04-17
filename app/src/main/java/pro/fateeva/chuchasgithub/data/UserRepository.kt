@@ -5,7 +5,7 @@ import pro.fateeva.chuchasgithub.domain.entities.User
 interface UserRepository {
     fun getUserList() : List<User>
     fun addUser(user: User)
-    fun getUser(id: Int): User?
+    fun getUser(id: Int): User
     fun deleteUser(user: User)
     fun deleteAll()
 }

@@ -6,18 +6,12 @@ import pro.fateeva.chuchasgithub.data.UserRepository
 import pro.fateeva.chuchasgithub.data.UserRepositoryImpl
 import pro.fateeva.chuchasgithub.domain.UserListUseCase
 import pro.fateeva.chuchasgithub.domain.UserListUseCaseImpl
-import pro.fateeva.chuchasgithub.domain.UserProfileUseCase
-import pro.fateeva.chuchasgithub.domain.UserProfileUseCaseImpl
 
 class App : Application() {
     private val userRepository: UserRepository by lazy { UserRepositoryImpl() }
 
     val userListUseCase: UserListUseCase by lazy  {
         UserListUseCaseImpl(userRepository)
-    }
-
-    val userProfileUseCase: UserProfileUseCase by lazy  {
-        UserProfileUseCaseImpl(userRepository)
     }
 }
 
