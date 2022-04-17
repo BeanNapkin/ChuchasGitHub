@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import okhttp3.internal.notifyAll
 import pro.fateeva.chuchasgithub.R
+import pro.fateeva.chuchasgithub.ReposRecyclerAdapter
 import pro.fateeva.chuchasgithub.app
-import pro.fateeva.chuchasgithub.databinding.UserListFragmentBinding
 import pro.fateeva.chuchasgithub.databinding.UserProfileFragmentBinding
-
 
 class UserProfileFragment(position: Int) : DialogFragment() {
 
@@ -50,6 +50,12 @@ class UserProfileFragment(position: Int) : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adapter = ReposRecyclerAdapter(
+            emptyList()
+        )
+
+        binding.reposRecyclerView.adapter = adapter
+
         viewModel.getUserLiveData().observe(viewLifecycleOwner)
         {
             binding.nameTextView.text = it.name
@@ -58,6 +64,8 @@ class UserProfileFragment(position: Int) : DialogFragment() {
                     Log.e("UserProfileFragment", "Failed to load avatar ${result.throwable}")
                 })
             }
+            adapter.repoList = it.listOfRepos
+            adapter.notifyDataSetChanged()
         }
 
         viewModel.getUser(position)
