@@ -1,11 +1,13 @@
 package pro.fateeva.chuchasgithub.ui.userProfile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import coil.load
 import pro.fateeva.chuchasgithub.R
 import pro.fateeva.chuchasgithub.app
 import pro.fateeva.chuchasgithub.databinding.UserListFragmentBinding
@@ -51,6 +53,11 @@ class UserProfileFragment(position: Int) : DialogFragment() {
         viewModel.getUserLiveData().observe(viewLifecycleOwner)
         {
             binding.nameTextView.text = it.name
+            binding.photoImageView.load(it.avatar) {
+                listener(onError = { _, result ->
+                    Log.e("UserProfileFragment", "Failed to load avatar ${result.throwable}")
+                })
+            }
         }
 
         viewModel.getUser(position)
