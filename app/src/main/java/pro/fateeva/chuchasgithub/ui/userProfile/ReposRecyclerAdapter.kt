@@ -38,3 +38,21 @@ class ReposRecyclerAdapter(
         }
     }
 }
+
+class RepoDiffUtilCallback(val oldList: List<String>, val newList: List<String>) : DiffUtil.Callback() {
+
+    override fun getOldListSize(): Int = oldList.size
+    override fun getNewListSize(): Int = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldRepo: String = oldList[oldItemPosition]
+        val newRepo: String = newList[newItemPosition]
+        return oldRepo == newRepo
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldRepo: String = oldList[oldItemPosition]
+        val newRepo: String = newList[newItemPosition]
+        return oldRepo == newRepo
+    }
+}

@@ -56,10 +56,10 @@ class UserListFragment : Fragment() {
         viewModel.getUserListLiveData().observe(viewLifecycleOwner)
         {
             val diffUtilCallback = DiffUtilCallback(adapter.userList, it)
-            val noteDiffResult = DiffUtil.calculateDiff(diffUtilCallback)
+            val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
 
             adapter.userList = it
-            noteDiffResult.dispatchUpdatesTo(adapter)
+            diffResult.dispatchUpdatesTo(adapter)
         }
 
         viewModel.getUserList()

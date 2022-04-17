@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DiffUtil
 import coil.load
 import okhttp3.internal.notifyAll
-import pro.fateeva.chuchasgithub.R
-import pro.fateeva.chuchasgithub.ReposRecyclerAdapter
-import pro.fateeva.chuchasgithub.app
+import pro.fateeva.chuchasgithub.*
 import pro.fateeva.chuchasgithub.databinding.UserProfileFragmentBinding
 
 class UserProfileFragment(position: Int) : DialogFragment() {
@@ -64,8 +63,11 @@ class UserProfileFragment(position: Int) : DialogFragment() {
                     Log.e("UserProfileFragment", "Failed to load avatar ${result.throwable}")
                 })
             }
+            val diffUtilCallback = RepoDiffUtilCallback(adapter.repoList, it.listOfRepos)
+            val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
+
             adapter.repoList = it.listOfRepos
-            adapter.notifyDataSetChanged()
+            diffResult.dispatchUpdatesTo(adapter)
         }
 
         viewModel.getUser(position)
