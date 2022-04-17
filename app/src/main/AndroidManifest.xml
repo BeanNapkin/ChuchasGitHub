@@ -15,6 +15,7 @@
         android:theme="@style/Theme.ChuchasGitHub">
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="sensor"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

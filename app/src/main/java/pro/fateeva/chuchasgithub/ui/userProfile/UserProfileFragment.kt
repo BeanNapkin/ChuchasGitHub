@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
@@ -13,9 +14,10 @@ import okhttp3.internal.notifyAll
 import pro.fateeva.chuchasgithub.*
 import pro.fateeva.chuchasgithub.databinding.UserProfileFragmentBinding
 
-class UserProfileFragment(position: Int) : DialogFragment() {
+class UserProfileFragment : DialogFragment() {
 
-    private var position = position
+    private val position: Int
+        get() = requireArguments().getInt(POSITION_ARG)
 
     private var _binding: UserProfileFragmentBinding? = null
     val binding: UserProfileFragmentBinding
@@ -75,6 +77,11 @@ class UserProfileFragment(position: Int) : DialogFragment() {
 
     companion object {
         const val TAG = "UserProfileFragment"
-        fun newInstance(position: Int) = UserProfileFragment(position)
+        const val POSITION_ARG = "POSITION_ARG"
+        fun newInstance(position: Int) = UserProfileFragment().apply {
+            arguments = bundleOf(
+                POSITION_ARG to position
+            )
+        }
     }
 }

@@ -15,8 +15,10 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, UserListFragment.newInstance())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, UserListFragment.newInstance())
+                .commit()
+        }
     }
 }

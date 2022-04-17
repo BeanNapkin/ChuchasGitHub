@@ -11,9 +11,12 @@ import pro.fateeva.chuchasgithub.DiffUtilCallback
 import pro.fateeva.chuchasgithub.UsersRecyclerAdapter
 import pro.fateeva.chuchasgithub.app
 import pro.fateeva.chuchasgithub.databinding.UserListFragmentBinding
+import pro.fateeva.chuchasgithub.domain.entities.User
 import pro.fateeva.chuchasgithub.ui.userProfile.UserProfileFragment
 
 class UserListFragment : Fragment() {
+
+    private lateinit var userList: List<User>
 
     private var _binding: UserListFragmentBinding? = null
     val binding: UserListFragmentBinding
@@ -55,6 +58,7 @@ class UserListFragment : Fragment() {
 
         viewModel.getUserListLiveData().observe(viewLifecycleOwner)
         {
+            userList = it
             val diffUtilCallback = DiffUtilCallback(adapter.userList, it)
             val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
 
