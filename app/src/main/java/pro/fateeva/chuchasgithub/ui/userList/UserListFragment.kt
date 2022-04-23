@@ -48,8 +48,8 @@ class UserListFragment : Fragment() {
 
         val adapter = UsersRecyclerAdapter(
             emptyList(),
-            userCardClickListener = { position ->
-                UserProfileFragment.newInstance(position)
+            userCardClickListener = { login ->
+                UserProfileFragment.newInstance(login)
                     .show(requireActivity().supportFragmentManager, UserProfileFragment.TAG)
             }
         )

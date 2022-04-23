@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import pro.fateeva.chuchasgithub.databinding.RepoItemBinding
 import pro.fateeva.chuchasgithub.databinding.UserItemBinding
+import pro.fateeva.chuchasgithub.domain.entities.Repo
 import pro.fateeva.chuchasgithub.domain.entities.User
 
 class ReposRecyclerAdapter(
-    var repoList: List<String>
+    var repoList: List<Repo>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -23,7 +24,7 @@ class ReposRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as RepoViewHolder).bind(repoList[position])
+        (holder as RepoViewHolder).bind(repoList[position].name)
     }
 
     override fun getItemCount(): Int {
@@ -39,20 +40,20 @@ class ReposRecyclerAdapter(
     }
 }
 
-class RepoDiffUtilCallback(val oldList: List<String>, val newList: List<String>) : DiffUtil.Callback() {
+class RepoDiffUtilCallback(val oldList: List<Repo>, val newList: List<Repo>) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int = oldList.size
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldRepo: String = oldList[oldItemPosition]
-        val newRepo: String = newList[newItemPosition]
+        val oldRepo: Repo = oldList[oldItemPosition]
+        val newRepo: Repo = newList[newItemPosition]
         return oldRepo == newRepo
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldRepo: String = oldList[oldItemPosition]
-        val newRepo: String = newList[newItemPosition]
+        val oldRepo: Repo = oldList[oldItemPosition]
+        val newRepo: Repo = newList[newItemPosition]
         return oldRepo == newRepo
     }
 }

@@ -10,14 +10,13 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import coil.load
-import okhttp3.internal.notifyAll
 import pro.fateeva.chuchasgithub.*
 import pro.fateeva.chuchasgithub.databinding.UserProfileFragmentBinding
 
 class UserProfileFragment : DialogFragment() {
 
-    private val position: Int
-        get() = requireArguments().getInt(POSITION_ARG)
+    private val userName: String?
+        get() = requireArguments().getString(LOGIN_ARG)
 
     private var _binding: UserProfileFragmentBinding? = null
     val binding: UserProfileFragmentBinding
@@ -57,7 +56,7 @@ class UserProfileFragment : DialogFragment() {
 
         binding.reposRecyclerView.adapter = adapter
 
-        viewModel.getUserLiveData().observe(viewLifecycleOwner)
+        viewModel.userLiveData.observe(viewLifecycleOwner)
         {
             binding.nameTextView.text = it.name
             binding.photoImageView.load(it.avatar) {
@@ -65,22 +64,26 @@ class UserProfileFragment : DialogFragment() {
                     Log.e("UserProfileFragment", "Failed to load avatar ${result.throwable}")
                 })
             }
-            val diffUtilCallback = RepoDiffUtilCallback(adapter.repoList, it.listOfRepos)
+        }
+
+        viewModel.reposLiveData.observe(viewLifecycleOwner){
+            val diffUtilCallback = RepoDiffUtilCallback(adapter.repoList, it)
             val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
 
-            adapter.repoList = it.listOfRepos
+            adapter.repoList = it
             diffResult.dispatchUpdatesTo(adapter)
         }
 
-        viewModel.getUser(position)
+        viewModel.getUser(userName ?: error("userName not found"))
+        viewModel.getUsersRepo(userName ?: error("userName not found"))
     }
 
     companion object {
         const val TAG = "UserProfileFragment"
-        const val POSITION_ARG = "POSITION_ARG"
-        fun newInstance(position: Int) = UserProfileFragment().apply {
+        const val LOGIN_ARG = "LOGIN_ARG"
+        fun newInstance(login: String) = UserProfileFragment().apply {
             arguments = bundleOf(
-                POSITION_ARG to position
+                LOGIN_ARG to login
             )
         }
     }

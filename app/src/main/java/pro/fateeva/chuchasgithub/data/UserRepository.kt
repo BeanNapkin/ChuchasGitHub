@@ -1,11 +1,11 @@
 package pro.fateeva.chuchasgithub.data
 
+import io.reactivex.rxjava3.core.Single
+import pro.fateeva.chuchasgithub.domain.entities.Repo
 import pro.fateeva.chuchasgithub.domain.entities.User
 
 interface UserRepository {
-    fun getUserList() : List<User>
-    fun addUser(user: User)
-    fun getUser(id: Int): User
-    fun deleteUser(user: User)
-    fun deleteAll()
+    fun getUserList() : Single<List<User>>
+    fun getReposList(userName: String): Single<List<Repo>>
+    fun getUser(userName: String): Single<User>
 }

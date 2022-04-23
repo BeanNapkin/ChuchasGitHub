@@ -10,7 +10,7 @@ import pro.fateeva.chuchasgithub.domain.entities.User
 
 class UsersRecyclerAdapter(
     var userList: List<User>,
-    private val userCardClickListener: (position: Int) -> Unit
+    private val userCardClickListener: (userName: String) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -36,7 +36,7 @@ class UsersRecyclerAdapter(
                 userNameTextView.text = user.name
 
                 userCardView.setOnClickListener {
-                    userCardClickListener.invoke(this@UserViewHolder.adapterPosition)
+                    userCardClickListener.invoke(user.name)
                 }
             }
         }
