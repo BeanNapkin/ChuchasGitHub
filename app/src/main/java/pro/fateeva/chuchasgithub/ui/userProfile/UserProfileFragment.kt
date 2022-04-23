@@ -11,7 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import coil.load
 import pro.fateeva.chuchasgithub.*
+import pro.fateeva.chuchasgithub.databinding.RepoItemBinding
+import pro.fateeva.chuchasgithub.databinding.UserItemBinding
 import pro.fateeva.chuchasgithub.databinding.UserProfileFragmentBinding
+import pro.fateeva.chuchasgithub.domain.entities.Repo
 
 class UserProfileFragment : DialogFragment() {
 
@@ -50,9 +53,12 @@ class UserProfileFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ReposRecyclerAdapter(
-            emptyList()
-        )
+        val adapter = RecyclerAdapter<Repo>(
+            emptyList(),
+            R.layout.repo_item
+        ){ repo, _ ->
+            RepoItemBinding.bind(this).reposTitleTextView.text = repo.name
+        }
 
         binding.reposRecyclerView.adapter = adapter
 
@@ -67,11 +73,7 @@ class UserProfileFragment : DialogFragment() {
         }
 
         viewModel.reposLiveData.observe(viewLifecycleOwner){
-            val diffUtilCallback = RepoDiffUtilCallback(adapter.repoList, it)
-            val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-
-            adapter.repoList = it
-            diffResult.dispatchUpdatesTo(adapter)
+            adapter.itemList = it
         }
 
         viewModel.getUser(userName ?: error("userName not found"))
