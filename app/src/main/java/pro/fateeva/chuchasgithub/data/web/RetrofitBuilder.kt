@@ -1,4 +1,4 @@
-package pro.fateeva.chuchasgithub.data
+package pro.fateeva.chuchasgithub.data.web
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

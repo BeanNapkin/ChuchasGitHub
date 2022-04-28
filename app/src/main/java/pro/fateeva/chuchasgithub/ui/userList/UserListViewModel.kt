@@ -2,15 +2,12 @@ package pro.fateeva.chuchasgithub.ui.userList
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
-import io.reactivex.rxjava3.schedulers.Schedulers
-import pro.fateeva.chuchasgithub.domain.UserListUseCase
+import pro.fateeva.chuchasgithub.domain.usecase.UserListUseCase
 import pro.fateeva.chuchasgithub.domain.entities.User
 
 class UserListViewModel(private val state: SavedStateHandle) : ViewModel() {

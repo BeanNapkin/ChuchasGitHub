@@ -2,11 +2,11 @@ package pro.fateeva.chuchasgithub
 
 import android.app.Application
 import android.content.Context
-import pro.fateeva.chuchasgithub.data.RetrofitBuilder
+import pro.fateeva.chuchasgithub.data.web.RetrofitBuilder
 import pro.fateeva.chuchasgithub.data.UserRepository
 import pro.fateeva.chuchasgithub.data.UserRepositoryImpl
-import pro.fateeva.chuchasgithub.domain.UserListUseCase
-import pro.fateeva.chuchasgithub.domain.UserListUseCaseImpl
+import pro.fateeva.chuchasgithub.domain.usecase.UserListUseCase
+import pro.fateeva.chuchasgithub.data.usecase.UserListUseCaseImpl
 
 class App : Application() {
     private val gitHubApi = RetrofitBuilder().getGitHubApi()

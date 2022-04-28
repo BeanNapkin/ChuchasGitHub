@@ -1,4 +1,4 @@
-package pro.fateeva.chuchasgithub.domain
+package pro.fateeva.chuchasgithub.domain.usecase
 
 import io.reactivex.rxjava3.core.Single
 import pro.fateeva.chuchasgithub.domain.entities.Repo
