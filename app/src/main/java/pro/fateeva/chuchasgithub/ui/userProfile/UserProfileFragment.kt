@@ -23,9 +23,7 @@ class UserProfileFragment : DialogFragment() {
 
     private var _binding: UserProfileFragmentBinding? = null
     val binding: UserProfileFragmentBinding
-        get() {
-            return _binding!!
-        }
+        get() = _binding!!
 
     override fun onDestroy() {
         super.onDestroy()

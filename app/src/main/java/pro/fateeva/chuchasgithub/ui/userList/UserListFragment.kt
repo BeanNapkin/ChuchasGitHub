@@ -17,9 +17,7 @@ class UserListFragment : Fragment() {
 
     private var _binding: UserListFragmentBinding? = null
     val binding: UserListFragmentBinding
-        get() {
-            return _binding!!
-        }
+        get() = _binding!!
 
     override fun onDestroy() {
         super.onDestroy()
