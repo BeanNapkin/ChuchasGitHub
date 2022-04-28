@@ -1,7 +1,7 @@
 package pro.fateeva.chuchasgithub.data.usecase
 
 import io.reactivex.rxjava3.core.Single
-import pro.fateeva.chuchasgithub.data.UserRepository
+import pro.fateeva.chuchasgithub.domain.UserRepository
 import pro.fateeva.chuchasgithub.domain.entities.Repo
 import pro.fateeva.chuchasgithub.domain.entities.User
 import pro.fateeva.chuchasgithub.domain.usecase.UserListUseCase

@@ -4,6 +4,7 @@ import io.reactivex.rxjava3.core.Single
 import pro.fateeva.chuchasgithub.data.web.GitHubApi
 import pro.fateeva.chuchasgithub.data.web.responses.RepoResponseData
 import pro.fateeva.chuchasgithub.data.web.responses.UserResponseData
+import pro.fateeva.chuchasgithub.domain.UserRepository
 import pro.fateeva.chuchasgithub.domain.entities.Repo
 import pro.fateeva.chuchasgithub.domain.entities.User
 import pro.fateeva.chuchasgithub.utils.toSingle
