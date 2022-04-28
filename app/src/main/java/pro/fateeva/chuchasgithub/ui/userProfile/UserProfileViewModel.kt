@@ -1,22 +1,53 @@
 package pro.fateeva.chuchasgithub.ui.userProfile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.kotlin.addTo
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import pro.fateeva.chuchasgithub.domain.UserListUseCase
+import pro.fateeva.chuchasgithub.domain.entities.Repo
 import pro.fateeva.chuchasgithub.domain.entities.User
 
 class UserProfileViewModel : ViewModel() {
     lateinit var useCase: UserListUseCase
 
     private val mutableLiveData: MutableLiveData<User> = MutableLiveData()
-    val liveData: LiveData<User> = mutableLiveData
+    val userLiveData: LiveData<User> = mutableLiveData
 
-    fun getUserLiveData() = liveData
+    private val reposMutableLiveData: MutableLiveData<List<Repo>> = MutableLiveData()
+    val reposLiveData: LiveData<List<Repo>> = reposMutableLiveData
 
-    fun getUser(position: Int) {
-        Thread {
-            mutableLiveData.postValue(useCase.getUser(position))
-        }.start()
+    private val compositeDisposable = CompositeDisposable()
+
+    fun getUser(userName: String) {
+        useCase.getUser(userName)
+            .subscribeBy(
+                onSuccess = {
+                    mutableLiveData.postValue(it)
+                },
+                onError = {
+                    Log.e("UserProfileViewModel", "Failed to get user info $it")
+                }
+            ).addTo(compositeDisposable)
+    }
+
+    fun getUsersRepo(userName: String) {
+        useCase.getReposList(userName)
+            .subscribeBy(
+                onSuccess = {
+                    reposMutableLiveData.postValue(it)
+                },
+                onError = {
+                    Log.e("UserProfileViewModel", "Failed to get users repo $it")
+                }
+            ).addTo(compositeDisposable)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
     }
 }

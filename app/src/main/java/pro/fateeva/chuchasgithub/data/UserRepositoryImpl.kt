@@ -1,36 +1,42 @@
 package pro.fateeva.chuchasgithub.data
 
+import io.reactivex.rxjava3.core.Single
+import pro.fateeva.chuchasgithub.data.responses.RepoResponseData
+import pro.fateeva.chuchasgithub.data.responses.UserResponseData
+import pro.fateeva.chuchasgithub.domain.entities.Repo
 import pro.fateeva.chuchasgithub.domain.entities.User
+import pro.fateeva.chuchasgithub.utils.toSingle
 
-class UserRepositoryImpl : UserRepository {
+class UserRepositoryImpl(
+    private val api: GitHubApi
+) : UserRepository {
 
-    private val usersList = mutableListOf<User>(
-        User(0, "Bob", "https://cdn.pixabay.com/photo/2019/10/06/20/01/cat-4531097_1280.jpg", listOf("Test", "First", "Notes", "BestApp", "BobsApp") ),
-        User(1, "Mike", "https://p1.pxfuel.com/preview/797/787/747/manul-summer-wild-animal-cat.jpg", listOf("MikesApp") ),
-        User(2, "Kate", "https://live.staticflickr.com/3523/3799555301_43dba95c44_b.jpg", listOf("Katusha", "OloloRepo") ),
-        User(3, "Rita_Margarita", "https://p2.piqsels.com/preview/327/843/679/harbor-seal-common-seal-seal-white-thumbnail.jpg", listOf("ChuchasApp", "SpaceApp", "NotesApp", "MVPapp", "ChuchaChacha") ),
-        User(4, "Perfect_sun", "https://cdn2.picryl.com/photo/2016/07/06/a-touching-moment-nz-fur-seals-2c7843-1024.jpg", listOf("Sunshine", "Reggy", "Happy") )
-    )
+    override fun getUserList(): Single<List<User>> =
+        toSingle(api.getUsersList(), { mapUser(it) })
 
-    override fun getUserList(): List<User> {
-        Thread.sleep(3000)
-        return usersList.toList()
-    }
+    override fun getReposList(userName: String): Single<List<Repo>> =
+        toSingle(api.getListOfRepos(userName), { mapRepo(it) })
 
-    override fun addUser(user: User) {
-        usersList.add(user)
-    }
+    override fun getUser(userName: String): Single<User> =
+        toSingle(api.getUser(userName)) { mapUser(it ?: error("User not found")) }
 
-    override fun getUser(id: Int) : User {
-        Thread.sleep(3000)
-        return usersList[id]
-    }
 
-    override fun deleteUser(user: User) {
-        usersList.remove(user)
-    }
+    private fun mapRepo(from: List<RepoResponseData>?): List<Repo> =
+        from?.map { it -> Repo(it.name ?: "") } ?: emptyList()
 
-    override fun deleteAll() {
-        usersList.removeAll(usersList)
-    }
+    private fun mapUser(from: UserResponseData): User =
+        User(
+            id = from.id ?: 0,
+            name = from.login ?: "",
+            avatar = from.avatar ?: ""
+        )
+
+    private fun mapUser(from: List<UserResponseData>?): List<User> =
+        from?.map { it ->
+            User(
+                id = it.id ?: 0,
+                avatar = it.avatar ?: "",
+                name = it.login ?: ""
+            )
+        } ?: emptyList()
 }

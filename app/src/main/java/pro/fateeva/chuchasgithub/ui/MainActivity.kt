@@ -1,7 +1,8 @@
-package pro.fateeva.chuchasgithub
+package pro.fateeva.chuchasgithub.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import pro.fateeva.chuchasgithub.R
 import pro.fateeva.chuchasgithub.databinding.ActivityMainBinding
 import pro.fateeva.chuchasgithub.ui.userList.UserListFragment
 
