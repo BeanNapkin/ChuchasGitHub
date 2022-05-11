@@ -1,7 +1,7 @@
-package pro.fateeva.chuchasgithub.data
+package pro.fateeva.chuchasgithub.data.web
 
-import pro.fateeva.chuchasgithub.data.responses.RepoResponseData
-import pro.fateeva.chuchasgithub.data.responses.UserResponseData
+import pro.fateeva.chuchasgithub.data.web.responses.RepoResponseData
+import pro.fateeva.chuchasgithub.data.web.responses.UserResponseData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

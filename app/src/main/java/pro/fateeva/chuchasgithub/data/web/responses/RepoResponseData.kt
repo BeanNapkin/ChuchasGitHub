@@ -1,4 +1,4 @@
-package pro.fateeva.chuchasgithub.data.responses
+package pro.fateeva.chuchasgithub.data.web.responses
 
 import com.google.gson.annotations.SerializedName
 

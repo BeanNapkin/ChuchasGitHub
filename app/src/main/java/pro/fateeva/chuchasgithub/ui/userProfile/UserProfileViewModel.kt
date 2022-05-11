@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
-import pro.fateeva.chuchasgithub.domain.UserListUseCase
+import pro.fateeva.chuchasgithub.domain.usecase.UserListUseCase
 import pro.fateeva.chuchasgithub.domain.entities.Repo
 import pro.fateeva.chuchasgithub.domain.entities.User
 
