@@ -7,11 +7,14 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import pro.fateeva.chuchasgithub.domain.usecase.UserListUseCase
 import pro.fateeva.chuchasgithub.domain.entities.User
 
-class UserListViewModel(private val state: SavedStateHandle) : ViewModel() {
-    lateinit var userListUseCase: UserListUseCase
+class UserListViewModel(private val state: SavedStateHandle) : ViewModel(), KoinComponent {
+
+    private val userListUseCase: UserListUseCase by inject()
     val liveData: LiveData<List<User>> = state.getLiveData("userlist")
     private val compositeDisposable = CompositeDisposable()
 

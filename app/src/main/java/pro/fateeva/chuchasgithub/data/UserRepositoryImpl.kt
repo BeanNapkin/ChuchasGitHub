@@ -2,8 +2,8 @@ package pro.fateeva.chuchasgithub.data
 
 import io.reactivex.rxjava3.core.Single
 import pro.fateeva.chuchasgithub.data.web.GitHubApi
-import pro.fateeva.chuchasgithub.data.web.responses.RepoResponseData
-import pro.fateeva.chuchasgithub.data.web.responses.UserResponseData
+import pro.fateeva.chuchasgithub.data.web.responses.RepoResponseDTO
+import pro.fateeva.chuchasgithub.data.web.responses.UserResponseDTO
 import pro.fateeva.chuchasgithub.domain.UserRepository
 import pro.fateeva.chuchasgithub.domain.entities.Repo
 import pro.fateeva.chuchasgithub.domain.entities.User
@@ -23,17 +23,17 @@ class UserRepositoryImpl(
         toSingle(api.getUser(userName)) { mapUser(it ?: error("User not found")) }
 
 
-    private fun mapRepo(from: List<RepoResponseData>?): List<Repo> =
+    private fun mapRepo(from: List<RepoResponseDTO>?): List<Repo> =
         from?.map { it -> Repo(it.name ?: "") } ?: emptyList()
 
-    private fun mapUser(from: UserResponseData): User =
+    private fun mapUser(from: UserResponseDTO): User =
         User(
             id = from.id ?: 0,
             name = from.login ?: "",
             avatar = from.avatar ?: ""
         )
 
-    private fun mapUser(from: List<UserResponseData>?): List<User> =
+    private fun mapUser(from: List<UserResponseDTO>?): List<User> =
         from?.map { it ->
             User(
                 id = it.id ?: 0,
