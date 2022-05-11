@@ -2,14 +2,14 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/userCardView"
+    android:id="@+id/user_card_view"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     app:cardBackgroundColor="#F4F4F4"
     android:layout_margin="5dp">
 
     <TextView
-        android:id="@+id/userNameTextView"
+        android:id="@+id/user_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"

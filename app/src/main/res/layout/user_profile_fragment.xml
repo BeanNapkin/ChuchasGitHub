@@ -8,7 +8,7 @@
     android:padding="10dp">
 
     <ImageView
-        android:id="@+id/photoImageView"
+        android:id="@+id/photo_image_view"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:cropToPadding="true"
@@ -16,23 +16,23 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
-        android:id="@+id/nameTextView"
+        android:id="@+id/name_text_view"
         android:layout_width="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="100dp"
         android:textSize="24sp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/photoImageView"/>
+        app:layout_constraintStart_toEndOf="@+id/photo_image_view"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reposRecyclerView"
+        android:id="@+id/repos_recycler_view"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photoImageView"
+        app:layout_constraintTop_toBottomOf="@+id/photo_image_view"
         app:layout_constraintStart_toStartOf="parent"
         tools:itemCount="10"
         tools:listitem="@layout/repo_item"/>
