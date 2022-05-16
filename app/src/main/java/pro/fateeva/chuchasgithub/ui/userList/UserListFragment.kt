@@ -6,14 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import org.koin.android.ext.android.inject
 import pro.fateeva.chuchasgithub.*
-import pro.fateeva.chuchasgithub.data.usecase.UserListUseCaseImpl
 import pro.fateeva.chuchasgithub.databinding.UserItemBinding
 import pro.fateeva.chuchasgithub.databinding.UserListFragmentBinding
 import pro.fateeva.chuchasgithub.domain.entities.User
-import pro.fateeva.chuchasgithub.domain.usecase.UserListUseCase
 import pro.fateeva.chuchasgithub.ui.userProfile.UserProfileFragment
 
 class UserListFragment : Fragment() {
@@ -28,7 +24,9 @@ class UserListFragment : Fragment() {
     }
 
     private val viewModel: UserListViewModel by lazy {
-        ViewModelProvider(this).get(UserListViewModel::class.java)
+        ViewModelProvider(this).get(UserListViewModel::class.java).also {
+            requireContext().app.appDependenciesComponent.inject(it)
+        }
     }
 
     override fun onCreateView(

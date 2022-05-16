@@ -8,13 +8,15 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import pro.fateeva.chuchasgithub.domain.usecase.UserListUseCase
 import pro.fateeva.chuchasgithub.domain.entities.Repo
 import pro.fateeva.chuchasgithub.domain.entities.User
+import javax.inject.Inject
 
 class UserProfileViewModel : ViewModel(), KoinComponent {
-    private val useCase: UserListUseCase by inject()
+
+    @Inject
+    lateinit var useCase: UserListUseCase
 
     private val mutableLiveData: MutableLiveData<User> = MutableLiveData()
     val userLiveData: LiveData<User> = mutableLiveData

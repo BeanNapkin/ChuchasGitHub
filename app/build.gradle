@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -42,10 +43,12 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
     // Java Compatibility
     implementation "io.insert-koin:koin-android-compat:$koin_version"
-// Jetpack WorkManager
+    // Jetpack WorkManager
     implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
-// Navigation Graph
+    // Navigation Graph
     implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
+    implementation 'com.google.dagger:dagger:2.41'
+    kapt 'com.google.dagger:dagger-compiler:2.41'
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
     implementation "io.reactivex.rxjava3:rxjava:3.1.4"
     implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"

@@ -8,14 +8,11 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DiffUtil
 import coil.load
 import pro.fateeva.chuchasgithub.*
 import pro.fateeva.chuchasgithub.databinding.RepoItemBinding
-import pro.fateeva.chuchasgithub.databinding.UserItemBinding
 import pro.fateeva.chuchasgithub.databinding.UserProfileFragmentBinding
 import pro.fateeva.chuchasgithub.domain.entities.Repo
-import pro.fateeva.chuchasgithub.domain.usecase.UserListUseCase
 
 class UserProfileFragment : DialogFragment() {
 
@@ -32,7 +29,9 @@ class UserProfileFragment : DialogFragment() {
     }
 
     private val viewModel: UserProfileViewModel by lazy {
-        ViewModelProvider(this).get(UserProfileViewModel::class.java)
+        ViewModelProvider(this).get(UserProfileViewModel::class.java).also {
+            requireContext().app.appDependenciesComponent.inject(it)
+        }
     }
 
     override fun getTheme(): Int {
